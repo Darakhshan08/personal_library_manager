@@ -60,17 +60,21 @@ class BookCollection:
 
     def find_book(self):
         """Search for books in the collection by title or author name."""
-        search_type = input("Search by:\n1. Title\n2. Author\nEnter your choice: ")
-        search_text = input("Enter search term: ").lower()
-        found_books = [
-            book
-            for book in self.book_list
-            if search_text in book["title"].lower()
-            or search_text in book["author"].lower()
-        ]
+        search_type = input("Search by:\n1. Title\n2. Author\nEnter your choice: ").strip()
+
+        if search_type not in ["1", "2"]:
+            print("❌ Invalid choice! Please enter 1 for Title or 2 for Author.\n")
+            return
+
+        search_text = input("Enter search term: ").strip().lower()
+
+        if search_type == "1":
+            found_books = [book for book in self.book_list if search_text in book["title"].lower()]
+        else:
+            found_books = [book for book in self.book_list if search_text in book["author"].lower()]
 
         if found_books:
-            print("Matching Books:")
+            print("📚 Matching Books:")
             for index, book in enumerate(found_books, 1):
                 reading_status = "Read" if book["read"] else "Unread"
                 print(
@@ -86,14 +90,11 @@ class BookCollection:
             if book["title"].lower() == book_title.lower():
                 print("Leave blank to keep existing value.")
                 book["title"] = input(f"New title ({book['title']}): ") or book["title"]
-                book["author"] = (
-                    input(f"New author ({book['author']}): ") or book["author"]
-                )
+                book["author"] = input(f"New author ({book['author']}): ") or book["author"]
                 book["year"] = input(f"New year ({book['year']}): ") or book["year"]
                 book["genre"] = input(f"New genre ({book['genre']}): ") or book["genre"]
                 book["read"] = (
-                    input("Have you read this book? (yes/no): ").strip().lower()
-                    == "yes"
+                    input("Have you read this book? (yes/no): ").strip().lower() == "yes"
                 )
                 self.save_to_file()
                 print("Book updated successfully!\n")
@@ -118,9 +119,7 @@ class BookCollection:
         """Calculate and display statistics about your reading progress."""
         total_books = len(self.book_list)
         completed_books = sum(1 for book in self.book_list if book["read"])
-        completion_rate = (
-            (completed_books / total_books * 100) if total_books > 0 else 0
-        )
+        completion_rate = (completed_books / total_books * 100) if total_books > 0 else 0
         print(f"Total books in collection: {total_books}")
         print(f"Reading progress: {completion_rate:.2f}%\n")
 
