@@ -1,0 +1,30 @@
+[
+    {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "year": "1960",
+        "genre": "Fiction",
+        "read": true
+    },
+    {
+        "title": "1984",
+        "author": "George Orwell",
+        "year": "1949",
+        "genre": "Dystopian",
+        "read": true
+    },
+    {
+        "title": "The Alchemist",
+        "author": "Paulo Coelho",
+        "year": "1988",
+        "genre": "Adventure",
+        "read": false
+    },
+    {
+        "title": "Sapiens: A Brief History of Humankind",
+        "author": "Yuval Noah Harari",
+        "year": "2011",
+        "genre": "History",
+        "read": false
+    }
+]
